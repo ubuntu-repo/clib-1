@@ -5,7 +5,7 @@
 Library of useful funcs, strucs for c
 
 ## Libraries used:
-* libs
+* [utHash](https://troydhanson.github.io/uthash/)
 
 ## Tools used:
 * Doxygen
