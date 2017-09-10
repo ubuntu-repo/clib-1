@@ -1,6 +1,7 @@
 #include "debug.h"
 #include "string.h"
 #include "vector.h"
+#include "map.h"
 
 void testDebug()
 {
@@ -12,7 +13,6 @@ void testDebug()
     
     debug_log("%s",o);
     debug_error("%i",&o);
-    
 }
 
 void testVector()
@@ -34,7 +34,23 @@ void testVector()
         debug_log("%i",vector_get(&a,i));
     
     vector_free(&a);
+}
+
+void testMap()
+{
+    map a;
+    void *b;
     
+    map_init(&a, 0);
+    
+    map_insert(&a, "ThisIsMyKey", "ThisIsMyValue");
+    
+    b = map_get(&a, "ThisIsMyKey");
+    
+    if (b)
+        debug_log("retreived value: %s", (char *)b);
+    else
+        debug_log("nope");
 }
 
 int main(int argc, const char * argv[])
@@ -45,6 +61,7 @@ int main(int argc, const char * argv[])
     
     debug_log("おはようございます");
     
-    return 0;
+    testMap();
     
+    return 0;
 }

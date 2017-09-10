@@ -9,6 +9,6 @@
     "StaticLibraryRootPath" : "libs",
     "BuildRootPath" :         "build",
 
-    "ExternalHeaderPaths" : [],
+    "ExternalHeaderPaths" : ["libs"],
     "ExternalLibraryPaths" : []
 }

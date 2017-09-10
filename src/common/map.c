@@ -7,7 +7,7 @@ typedef struct pair
     void *key;
     void *value;
     
-    UT_hash_table _maphandle;
+    UT_hash_handle hh;
     
 } pair;
 
@@ -20,22 +20,28 @@ void map_init(map *a, const int aKeySize)
     
 }
 
-void *map_get(map *a, void* aKey)
+void *map_get(map *aMap, void* aKey)
 {
-    if (!a || !aKey) return 0;
+    if (aMap && aKey)
+    {
+        pair *p = NULL;
     
-    //pair *keyvalue = 0;
-    void *ptr;
+        HASH_FIND(hh, aMap->_data, &aKey, sizeof(void *), p);
     
-    //HASH_FIND(_maphandle, a->_data, &aKey, a->_keysize, ptr);  /* s: output pointer */
-    return ptr;
+        if (p)
+            return p->value;
+    }
     
-    //HASH_FIND(a->_data)
-    
+    return NULL;
 }
 
-void map_insert(map *a, void* aKey, void* aValue)
+void map_insert(map *aMap, void* aKey, void* aValue)
 {
-    if (!a || !aKey || !aValue) return;
+    if (!aMap || !aKey || !aValue) return;
     
+    pair *newPair = (pair*)malloc(sizeof(pair));
+    newPair->key   = aKey;
+    newPair->value = aValue;
+    
+    HASH_ADD(hh, aMap->_data, key, sizeof(void *), newPair);
 }
