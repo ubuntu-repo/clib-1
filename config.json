@@ -1,7 +1,7 @@
 {
-    "ProjectName" :      "GDK",
-    "BriefDescription" : "C++11 game development kit",
-    "ProjectType" :      "StaticLibrary",
+    "ProjectName" :      "Clib",
+    "BriefDescription" : "General purpose c lib",
+    "ProjectType" :      "Executable",
     "MajorVersion" :     "0",
     "MinorVersion" :     "1",
 

@@ -27,7 +27,7 @@ void *map_get(map *a, void* aKey)
     //pair *keyvalue = 0;
     void *ptr;
     
-    HASH_FIND(_maphandle, a->_data, &aKey, a->_keysize, ptr);  /* s: output pointer */
+    //HASH_FIND(_maphandle, a->_data, &aKey, a->_keysize, ptr);  /* s: output pointer */
     return ptr;
     
     //HASH_FIND(a->_data)
