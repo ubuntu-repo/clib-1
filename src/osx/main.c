@@ -2,8 +2,9 @@
 #include "string.h"
 #include "vector.h"
 #include "map.h"
+#include "cJSON.h"
 
-void testDebug()
+void testCString()
 {
     char *a = "What";
     char *b = " is";
@@ -53,15 +54,65 @@ void testMap()
         debug_log("nope");
 }
 
+void testCJSON()
+{
+    char *data =
+    "{"
+        "\"name\": \"Jack ('Bee') Nimble\","
+        "\"format\": {"
+            "\"type\":       \"rect\","
+            "\"width\":      1920,"
+            "\"height\":     1080,"
+            "\"interlace\":  false,"
+            "\"frame rate\": 24"
+        "}"
+    "}";
+    
+    cJSON *root = cJSON_Parse(data);
+    
+    if (root)
+    {
+        cJSON *name_item;
+        
+        if ((name_item = cJSON_GetObjectItem(root, "name")))
+        {
+            if (cJSON_IsString(name_item))
+            {
+                char *name = NULL;
+                name = name_item->valuestring;
+                debug_log("JSON name: %s", name);
+            }
+        }
+        
+        cJSON *format;
+        
+        if ((format = cJSON_GetObjectItemCaseSensitive(root, "format")))
+        {
+            cJSON *framerate_item = cJSON_GetObjectItemCaseSensitive(format, "frame rate");
+            
+            if (cJSON_IsNumber(framerate_item))
+            {
+                float framerate = 0;
+            
+                framerate = framerate_item->valuedouble;
+                debug_log("JSON framerate: %f", framerate);
+            
+                cJSON_SetNumberValue(framerate_item, 25);
+                framerate = framerate_item->valuedouble;
+                debug_log("JSON framerate: %f", framerate);
+            }
+        }
+    }
+    
+    cJSON_Delete(root);
+}
+
 int main(int argc, const char * argv[])
 {
-    testDebug();
-    
+    testCString();
     testVector();
-    
-    debug_log("おはようございます");
-    
     testMap();
+    testCJSON();
     
     return 0;
 }
