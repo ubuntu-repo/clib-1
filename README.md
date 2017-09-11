@@ -1,8 +1,7 @@
-# CLib
-(Image)
+# clib
 
 ## Description:
-Library of useful funcs, strucs for c
+C library containing: Vector, Map, JSON parsing, String manipulation
 
 ## Libraries used:
 * [utHash](https://troydhanson.github.io/uthash/)
